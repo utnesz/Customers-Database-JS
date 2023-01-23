@@ -1,7 +1,6 @@
 # Customers-Database-JS
 
-This is database handler app, presents a list of customers from a server,
-and DOM manipulation using vanilla javascript.
+This is a database handler app, presents a list of customers which are coming from a webserver, and DOM manipulation using vanilla javascript.
 
 Data server provided by: nettuts.hu
 
