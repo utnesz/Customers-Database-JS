@@ -9,7 +9,7 @@ let editBtn;
 let delBtn;
 let btnGroup;
 
-let keys = ["id", "name", "email", "address"];
+let keys = ["id", "name", "email", "rating", "address"];
 
 // GET method
 
@@ -93,33 +93,33 @@ function createBtnGroup() {
     });
 
     let editBtn = createAnyElement("button", {
-        class: "btn-edit",
+        class: "btn-edit btn text-light",
         onclick: "editUser(this)",
     });
     editBtn.innerHTML = `<i class="fa fa-pencil" aria-hidden="true"></i>`;
 
     let deleteBtn = createAnyElement("button", {
-        class: "btn-del",
+        class: "btn-del btn text-light",
         onclick: "delUser(this)"
     });
     deleteBtn.innerHTML = `<i class="fa fa-trash-o" aria-hidden="true"></i>`;
 
     let saveBtn = createAnyElement("button", {
-        class: "btn-save",
+        class: "btn-save btn text-light",
         onclick: "saveUser(this)",
         style: "display: none"
     });
     saveBtn.innerHTML = `<i class="fa fa-save" aria-hidden="true"></i>`;
 
     let undoBtn = createAnyElement("button", {
-        class: "btn-undo",
+        class: "btn-undo btn text-light",
         onclick: "undoUser(this)",
         style: "display: none"
     });
     undoBtn.innerHTML = `<i class="fa fa-undo" aria-hidden="true"></i>`;
 
     let banBtn = createAnyElement("button", {
-        class: "btn-ban",
+        class: "btn-ban ",
         onclick: "alertModal()",
         style: "display: none"
     });
@@ -294,7 +294,7 @@ function addUserRow(row) {
     }
 
     let newBtn = createAnyElement("button", {
-        class: "newUser",
+        class: "newUser btn text-light text-center",
         onclick: "createUser(this)"
     });
     newBtn.innerHTML = `<i class="fa fa-plus-square" aria-hidden="true"></i>`;
