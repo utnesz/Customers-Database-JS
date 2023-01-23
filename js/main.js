@@ -394,6 +394,7 @@ window.onclick = function (event) {
 
 const delModal = () => {
     modalId.innerHTML = `<p id="modalText" class="Modal__text green"> User deleted!</p>`;
+    modalId.classList.add('modal')
     modals();
 }
 
