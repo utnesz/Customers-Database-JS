@@ -5,3 +5,4 @@ This is a database handler app, presents a list of customers which are coming fr
 Data server provided by: nettuts.hu
 
 Design elements powered by Bootstrap & Fontawesome
+

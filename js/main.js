@@ -125,14 +125,14 @@ function createBtnGroup() {
     let banBtn = createAnyElement("button", {
         class: "btn-ban btn text-light",
         onclick: "alertModal()",
-        style: "visibility: hidden"
+        style: "display: none"
     });
     banBtn.innerHTML = `<i class="fa fa-pencil" aria-hidden="true"></i>`;
 
     let ban2Btn = createAnyElement("button", {
         class: "btn-ban2 btn text-light",
         onclick: "alertModal()",
-        style: "visibility: hidden"
+        style: "display: none"
     });
     ban2Btn.innerHTML = `<i class="fa fa-trash-o" aria-hidden="true"></i>`;
 
@@ -173,8 +173,6 @@ const editUser = (btn) => {
 
     editBtn.forEach(btn => (btn.parentElement.children[0].style.visibility = "hidden"));
     delBtn.forEach(btn => (btn.parentElement.children[1].style.visibility = "hidden"));
-    banBtn.forEach(btn => (btn.parentElement.children[4].style.visibility = "visible"));
-    ban2Btn.forEach(btn => (btn.parentElement.children[5].style.visibility = "visible"));
 }
 
 
@@ -341,6 +339,7 @@ function createUser(btn) {
 
     if (nameMatch && emailMatch && addressMatch) {
         newUserModal();
+
         let fetchOptions = {
             method: "POST",
             mode: "cors",
@@ -355,7 +354,7 @@ function createUser(btn) {
             resp => resp.json(),
             err => console.error(err)
         ).then(
-            data => startGetUsers()
+            (data) => { startGetUsers(data) }
         );
 
     } else if (!nameMatch && emailMatch && addressMatch) {
