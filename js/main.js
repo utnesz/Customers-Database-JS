@@ -1,5 +1,7 @@
 'use strict'
 
+// Modal
+
 const modal = document.getElementById("delModal");
 const btn = document.getElementById("mbutton");
 const span = document.getElementsByClassName("close")[0];
@@ -51,11 +53,13 @@ function fillDataTable(data, tableID) {
     tBody.appendChild(newRow);
 
     for (let row of data) {
-        let tr = createAnyElement("tr");
+        let tr = createAnyElement("tr", {
+            class: "table"
+        });
         for (let k of keys) {
             let td = createAnyElement("td");
             let input = createAnyElement("input", {
-                class: "input",
+                class: "input border border-secondary rounded form-control border-1",
                 value: row[k],
                 name: k,
                 readOnly: true,
@@ -107,28 +111,28 @@ function createBtnGroup() {
     let saveBtn = createAnyElement("button", {
         class: "btn-save btn text-light",
         onclick: "saveUser(this)",
-        style: "display: none"
+        style: "visibility: hidden"
     });
     saveBtn.innerHTML = `<i class="fa fa-save" aria-hidden="true"></i>`;
 
     let undoBtn = createAnyElement("button", {
         class: "btn-undo btn text-light",
         onclick: "undoUser(this)",
-        style: "display: none"
+        style: "visibility: hidden"
     });
     undoBtn.innerHTML = `<i class="fa fa-undo" aria-hidden="true"></i>`;
 
     let banBtn = createAnyElement("button", {
-        class: "btn-ban ",
+        class: "btn-ban btn text-light",
         onclick: "alertModal()",
-        style: "display: none"
+        style: "visibility: hidden"
     });
     banBtn.innerHTML = `<i class="fa fa-pencil" aria-hidden="true"></i>`;
 
     let ban2Btn = createAnyElement("button", {
-        class: "btn-ban2",
+        class: "btn-ban2 btn text-light",
         onclick: "alertModal()",
-        style: "display: none"
+        style: "visibility: hidden"
     });
     ban2Btn.innerHTML = `<i class="fa fa-trash-o" aria-hidden="true"></i>`;
 
@@ -157,19 +161,20 @@ const editUser = (btn) => {
 
     const name = tr.children[1].children[0].value
     const email = tr.children[2].children[0].value
-    const address = tr.children[3].children[0].value
+    const ratings = tr.children[3].children[0].value
+    const address = tr.children[4].children[0].value
 
-    btn.style.display = "none";
-    btn.parentElement.children[1].style.display = "none";
-    btn.parentElement.children[2].style.display = "inline-block";
-    btn.parentElement.children[3].style.display = "inline-block";
-    btn.parentElement.children[4].style.display = "none";
-    btn.parentElement.children[5].style.display = "none";
+    btn.style.visibility = "hidden";
+    btn.parentElement.children[1].style.visibility = "hidden";
+    btn.parentElement.children[2].style.visibility = "visible";
+    btn.parentElement.children[3].style.visibility = "visible";
+    btn.parentElement.children[4].style.visibility = "hidden";
+    btn.parentElement.children[5].style.visibility = "hidden";
 
-    editBtn.forEach(btn => (btn.parentElement.children[0].style.display = "none"));
-    delBtn.forEach(btn => (btn.parentElement.children[1].style.display = "none"));
-    banBtn.forEach(btn => (btn.parentElement.children[4].style.display = "inline-block"));
-    ban2Btn.forEach(btn => (btn.parentElement.children[5].style.display = "inline-block"));
+    editBtn.forEach(btn => (btn.parentElement.children[0].style.visibility = "hidden"));
+    delBtn.forEach(btn => (btn.parentElement.children[1].style.visibility = "hidden"));
+    banBtn.forEach(btn => (btn.parentElement.children[4].style.visibility = "visible"));
+    ban2Btn.forEach(btn => (btn.parentElement.children[5].style.visibility = "visible"));
 }
 
 
@@ -181,12 +186,13 @@ function saveUser(btn) {
     Array.from(tr.children).forEach(td => td.children[0].readOnly = true);
     const name = tr.children[1].children[0].value
     const email = tr.children[2].children[0].value
-    const address = tr.children[3].children[0].value
+    const ratings = tr.children[3].children[0].value
+    const address = tr.children[4].children[0].value
 
-    btn.style.display = "none";
-    btn.parentElement.children[3].style.display = "none";
-    btn.parentElement.children[0].style.display = "inline-block";
-    btn.parentElement.children[1].style.display = "inline-block";
+    btn.style.visibility = "hidden";
+    btn.parentElement.children[3].style.visibility = "hidden";
+    btn.parentElement.children[0].style.visibility = "visible";
+    btn.parentElement.children[1].style.visibility = "visible";
 
     const isValidEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const isValidName = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
@@ -241,12 +247,13 @@ function undoUser(btn) {
     Array.from(tr.children).forEach(td => td.children[0].readOnly = true);
     const name = tr.children[1].children[0].value
     const email = tr.children[2].children[0].value
-    const address = tr.children[3].children[0].value
+    const ratings = tr.children[3].children[0].value
+    const address = tr.children[4].children[0].value
 
-    btn.style.display = "none";
-    btn.parentElement.children[2].style.display = "none";
-    btn.parentElement.children[0].style.display = "inline-block";
-    btn.parentElement.children[1].style.display = "inline-block";
+    btn.style.visibility = "hidden";
+    btn.parentElement.children[2].style.visibility = "hidden";
+    btn.parentElement.children[0].style.visibility = "visible";
+    btn.parentElement.children[1].style.visibility = "visible";
     startGetUsers();
 
     onclick
@@ -280,13 +287,16 @@ function delUser(btn) {
 // New User
 
 function addUserRow(row) {
+
     let tr = createAnyElement("tr");
+
     for (let k of keys) {
         let td = createAnyElement("td");
+
         let input = createAnyElement("input", {
-            class: "input",
+            class: "input rounded border-secondary border-2",
             name: k,
-            placeholder: "New data..."
+            placeholder: "Add new data..."
 
         });
         td.appendChild(input);
@@ -297,10 +307,14 @@ function addUserRow(row) {
         class: "newUser btn text-light text-center",
         onclick: "createUser(this)"
     });
+
     newBtn.innerHTML = `<i class="fa fa-plus-square" aria-hidden="true"></i>`;
+
     let td = createAnyElement("td");
+
     td.appendChild(newBtn);
     tr.appendChild(td);
+
     return tr;
 }
 
@@ -314,7 +328,8 @@ function createUser(btn) {
     Array.from(tr.children).forEach(td => td.children[0].readOnly = true);
     const name = tr.children[1].children[0].value
     const email = tr.children[2].children[0].value
-    const address = tr.children[3].children[0].value
+    const ratings = tr.children[3].children[0].value
+    const address = tr.children[4].children[0].value
 
     const isValidEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const isValidName = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
@@ -393,8 +408,7 @@ window.onclick = function (event) {
 
 
 const delModal = () => {
-    modalId.innerHTML = `<p id="modalText" class="Modal__text green"> User deleted!</p>`;
-    modalId.classList.add('modal')
+    modalId.innerHTML = `<p id="modalText" class="Modal__text text-success"> User deleted!</p>`;
     modals();
 }
 
