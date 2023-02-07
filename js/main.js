@@ -10,6 +10,8 @@ const btnok = document.getElementsByClassName("button-ok")[0];
 let editBtn;
 let delBtn;
 let btnGroup;
+let banBtn;
+let ban2Btn
 
 let keys = ["id", "name", "email", "rating", "address"];
 
