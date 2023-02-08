@@ -196,11 +196,14 @@ function saveUser(btn) {
 
     const isValidEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const isValidName = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+    const isValidRatings = /^[1-5]$/;
     const isVAlidAddress = /[\w',-\\/.\s]/;
 
     const nameMatch = name.match(isValidName);
     const emailMatch = email.match(isValidEmail);
+    const ratingsMatch = ratings.match(isValidRatings);
     const addressMatch = address.match(isVAlidAddress);
+
 
     if (nameMatch && emailMatch && addressMatch) {
         okModal();
@@ -220,17 +223,20 @@ function saveUser(btn) {
             resp => resp.json(),
             err => console.error(err)
         ).then(
-            data => startGetUsers()
+            data => startGetUsers(data)
         );
 
-    } else if (!nameMatch && emailMatch && addressMatch) {
+    } else if (!nameMatch && emailMatch && addressMatch && ratingsMatch) {
         nameModal();
         undoUser();
-    } else if (nameMatch && !emailMatch && addressMatch) {
+    } else if (nameMatch && !emailMatch && addressMatch && ratingsMatch) {
         emailModal();
         undoUser();
-    } else if (nameMatch && emailMatch && !addressMatch) {
+    } else if (nameMatch && emailMatch && !addressMatch && ratingsMatch) {
         addressModal();
+        undoUser();
+    } else if (nameMatch && emailMatch && addressMatch && !ratingsMatch) {
+        ratingsModal();
         undoUser();
     } else {
         validModal();
@@ -255,8 +261,6 @@ function undoUser(btn) {
     btn.parentElement.children[0].style.visibility = "visible";
     btn.parentElement.children[1].style.visibility = "visible";
     startGetUsers();
-
-    onclick
 }
 
 
@@ -333,10 +337,13 @@ function createUser(btn) {
 
     const isValidEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const isValidName = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+    const isValidRatings = /^[1-5]$/;
     const isVAlidAddress = /[\w',-\\/.\s]/;
+
 
     const nameMatch = name.match(isValidName);
     const emailMatch = email.match(isValidEmail);
+    const ratingsMatch = ratings.match(isValidRatings);
     const addressMatch = address.match(isVAlidAddress);
 
     if (nameMatch && emailMatch && addressMatch) {
@@ -356,15 +363,17 @@ function createUser(btn) {
             resp => resp.json(),
             err => console.error(err)
         ).then(
-            (data) => { startGetUsers(data) }
+            (data) => { startGetUsers() }
         );
 
-    } else if (!nameMatch && emailMatch && addressMatch) {
+    } else if (!nameMatch && emailMatch && addressMatch && ratingsMatch) {
         nameModal();
-    } else if (nameMatch && !emailMatch && addressMatch) {
+    } else if (nameMatch && !emailMatch && addressMatch && ratingsMatch) {
         emailModal();
-    } else if (nameMatch && emailMatch && !addressMatch) {
+    } else if (nameMatch && emailMatch && !addressMatch && ratingsMatch) {
         addressModal();
+    } else if (nameMatch && emailMatch && addressMatch && !ratingsMatch) {
+        ratingsModal();
     } else {
         validModal();
     }
@@ -430,6 +439,10 @@ const emailModal = () => {
 
 const addressModal = () => {
     modalId.innerHTML = `<p id="modalText" class="Modal__text red">Please add valid address</p>`;
+    modals();
+};
+const ratingsModal = () => {
+    modalId.innerHTML = `<p id="modalText" class="Modal__text red">Ratings canb only numbers between 1-4!</p>`;
     modals();
 };
 
