@@ -205,7 +205,7 @@ function saveUser(btn) {
     const addressMatch = address.match(isVAlidAddress);
 
 
-    if (nameMatch && emailMatch && addressMatch) {
+    if (nameMatch && emailMatch && ratingsMatch && addressMatch) {
         okModal();
         let data = getRowData(tr);
         let id = tr.children[0].children[0].value;
@@ -346,7 +346,7 @@ function createUser(btn) {
     const ratingsMatch = ratings.match(isValidRatings);
     const addressMatch = address.match(isVAlidAddress);
 
-    if (nameMatch && emailMatch && addressMatch) {
+    if (nameMatch && emailMatch && ratingsMatch && addressMatch) {
         newUserModal();
 
         let fetchOptions = {
