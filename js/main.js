@@ -31,7 +31,7 @@ function getServerData(url) {
 }
 
 function startGetUsers() {
-    getServerData("https://nettuts.hu/jms/utnesz/customers").then(
+    getServerData("https://nettuts.hu/jms/utnes/customers").then(
         data => fillDataTable(data, "usersTable")
     );
 }
@@ -219,7 +219,7 @@ function saveUser(btn) {
             body: JSON.stringify(data)
         };
 
-        fetch(`https://nettuts.hu/jms/utnesz/customers/${id}`, fetchOptions).then(
+        fetch(`https://nettuts.hu/jms/utnes/customers/${id}`, fetchOptions).then(
             resp => resp.json(),
             err => console.error(err)
         ).then(
@@ -276,7 +276,7 @@ function delUser(btn) {
         cache: "no-cache"
     };
 
-    fetch(`https://nettuts.hu/jms/utnesz/customers/${id}`, fetchOptions).then(
+    fetch(`https://nettuts.hu/jms/utnes/customers/${id}`, fetchOptions).then(
         resp => resp.json(),
         err => console.error(err)
     ).then(
@@ -359,7 +359,7 @@ function createUser(btn) {
             body: JSON.stringify(data)
         };
 
-        fetch(`https://nettuts.hu/jms/utnesz/customers`, fetchOptions).then(
+        fetch(`https://nettuts.hu/jms/utnes/customers`, fetchOptions).then(
             resp => resp.json(),
             err => console.error(err)
         ).then(
@@ -383,8 +383,11 @@ function getRowData(tr) {
     let inputs = tr.querySelectorAll("input");
     let data = {};
     for (let i = 0; i < inputs.length; i++) {
-        data[inputs[i].name] = inputs[i].value;
+        if (inputs[i].name !== 'id') {
+            data[inputs[i].name] = inputs[i].value;
+        }
     }
+
     return data;
 }
 
